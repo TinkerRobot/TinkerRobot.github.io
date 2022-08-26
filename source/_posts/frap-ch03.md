@@ -59,10 +59,15 @@ $$
 $$
 \begin{aligned}
     \mathsf{t(\alpha)} &= \mathsf{list}(\alpha) \\
+
     \mathsf{empty} &= [] \\
+
     \mathsf{enqueue}(q, x) &= {[x]} \bowtie {q} \\
+
     \mathsf{dequeue}([]) &= \cdot \\
+
     \mathsf{dequeue}({[x]} \bowtie {q}) &= ([], x)\textrm{, 若 $\mathsf{dequeue}(q) = \cdot$.} \\
+    
     \mathsf{dequeue}({[x]} \bowtie {q}) &= ({[x]} \bowtie {q'}, y)\textrm{, 若 $\mathsf{dequeue}(q) = (q', y)$.}
 \end{aligned}
 $$
