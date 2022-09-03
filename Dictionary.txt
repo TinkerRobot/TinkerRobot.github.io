@@ -1,0 +1,21 @@
+abstract syntax  抽象语法
+abstract syntax tree  抽象语法树
+algebraic datatype  代数数据类型
+Backus-Naur Form (BNF)
+conclusion  结论
+concrete syntax  具体语法
+constructor  构造函数
+grammar  文法
+induction  归纳
+induction principle  归纳原理
+inductive definition  归纳定义
+inductive type  归纳类型
+inference rule  推断规则
+nonterminal  非终结符
+premise  前提
+primitive recursion  原始递归
+recursive definition  递归定义
+semantics  语义
+structural induction  结构性归纳
+syntax  语法
+ternimal  终结符
