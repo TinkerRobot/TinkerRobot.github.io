@@ -608,7 +608,7 @@
 
 "hexo-renderer-pandoc@^0.3.1":
   "integrity" "sha512-ZTUzLkJHFA6OCzk37xR9PWYydLwuv4qV7iJMe5p88gxiIo3d1M/dOwsIXEra/olcA/y9UKw57qASCby1NseNsw=="
-  "resolved" "https://registry.npmjs.org/hexo-renderer-pandoc/-/hexo-renderer-pandoc-0.3.1.tgz"
+  "resolved" "https://registry.npmmirror.com/hexo-renderer-pandoc/-/hexo-renderer-pandoc-0.3.1.tgz"
   "version" "0.3.1"
 
 "hexo-renderer-stylus@^2.0.0":
