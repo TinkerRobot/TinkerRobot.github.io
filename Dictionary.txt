@@ -5,6 +5,7 @@ Backus-Naur Form (BNF)  巴科斯——诺尔范式
 conclusion  结论
 concrete syntax  具体语法
 constructor  构造函数
+decidable theory  可判定定理
 grammar  文法
 induction  归纳
 inductive hypothesis  归纳假设
@@ -14,6 +15,7 @@ inductive definition  归纳定义
 inductive set:  归纳集合
 inductive type  归纳类型
 inference rule  推断规则
+linear arithmetic  线性运算
 nonterminal  非终结符
 predicate  断言
 premise  前提
