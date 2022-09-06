@@ -198,7 +198,14 @@ $$
 \begin{aligned}
   \textrm{常量} \quad & n \in \mathbb Z \\
   \textrm{变量} \quad & x \in \mathsf{Strings} \\
-  \textrm{词语} \quad & e ::= x \mid n \mid e + e \mid e - e \\
+  \textrm{项} \quad & e ::= x \mid n \mid e + e \mid e - e \\
   \textrm{命题} \quad & \phi ::= e = e \mid e < e \mid \neg \phi \mid \phi \land \phi
 \end{aligned}
 $$
+
+这里所使用的运算是 *线性（linear）* 的，线性在这里的含义与在 *线性代数* 中的含义一致：即不会对两个含有变量的项使用乘法。
+
+The arithmetic terms used here are \emph{linear} in the same sense as \emph{linear algebra}\index{linear algebra}: we never multiply together two terms containing variables.
+Actually, multiplication is prohibited outright, but we allow multiplication by a constant as an abbreviation (logically speaking) for repeated addition.
+Propositions are formed out of equality and less-than tests on terms, and we also have the Boolean negation (``not'') operator $\neg$ and conjunction (``and'') operator $\land$.
+This set of propositional\index{propositional logic} operators is enough to encode the other usual inequality and propositional operators, so we allow them, too, as convenient shorthands.
