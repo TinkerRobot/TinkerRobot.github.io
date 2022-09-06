@@ -124,7 +124,7 @@ $$
 为递归函数定义一个新的记号也是一种常见的做法。例如，我们可以使用 $\lvert e \rvert$ 表示 $\mathsf{size}(e)$ 如下：
 
 $$
-\newcommand{\size}[1]{{\left \lvert #1 \right \rvert}}
+\newcommand{\size}[1]{{\lvert #1 \rvert}}
 
 \begin{aligned}
   \size{\mathsf{Const}(n)} &= 1 \\
@@ -137,7 +137,7 @@ $$
 让我们继续行使我们的创造许可证，使用 $\lceil e \rceil$ 表示 $e$ 的 *深度（depth）*，即在语法树中从根节点到任意叶子节点的向下路径长度的最大值。
 
 $$
-\newcommand{\depth}[1]{{\left \lceil #1 \right \rceil}}
+\newcommand{\depth}[1]{{\lceil #1 \rceil}}
 
 \begin{aligned}
   \depth{\mathsf{Const}(n)} &= 1 \\
@@ -184,7 +184,7 @@ $$
 
 为了展示归纳法的作用，我们证明下文中的定理，对上文的的两个递归定义进行合理性检查：depth 不能超过 size。
 
-> **定理2.1.** 对任意 $e \in \mathsf{Exp}$, $\depth{e} \leq \size{e}$.
+> **定理2.1.** 对任意 $e \in \mathsf{Exp}$, $\newcommand{\size}[1]{{\lvert #1 \rvert}} \newcommand{\depth}[1]{{\lceil #1 \rceil}} \depth{e} \leq \size{e}$.
 > 
 > **证明** 对 $e$ 的结构进行归纳可得定理成立。
 
