@@ -184,7 +184,7 @@ $$
 
 为了展示归纳法的作用，我们证明下文中的定理，对上文的的两个递归定义进行合理性检查：depth 不能超过 size。
 
-> **定理2.1.** 对任意 $e \in \mathsf{Exp}$, $\newcommand{\size}[1]{{\lvert #1 \rvert}} \newcommand{\depth}[1]{{\lceil #1 \rceil}} \depth{e} \leq \size{e}$.
+> **定理2.1.** 对任意 $e \in \mathsf{Exp}$, $\lceil e \rceil \leq \lvert e \rvert$.
 > 
 > **证明** 对 $e$ 的结构进行归纳可得定理成立。
 
