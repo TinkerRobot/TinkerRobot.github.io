@@ -137,7 +137,6 @@ $$
 
 $$
 \newcommand{\depth}[1]{\lceil #1 \rceil}
-
 \begin{aligned}
   \depth{\mathsf{Const}(n)} &= 1 \\
   \depth{\mathsf{Var}(x)} &= 1 \\
