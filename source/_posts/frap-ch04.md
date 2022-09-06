@@ -21,7 +21,6 @@ $$
 \newcommand{\mempty}[0]{\bullet}
 \newcommand{\msel}[2]{#1(#2)}
 \newcommand{\mupd}[3]{#1[#2 \mapsto #3]}
-
 \begin{aligned}
   \mempty \quad & 空映射，其定义域为 \emptyset \\
   \msel{m}{k} \quad & 键 k 在映射 m 中对应的值 \\
@@ -35,7 +34,6 @@ $$
 \newcommand{\mempty}[0]{\bullet}
 \newcommand{\msel}[2]{#1(#2)}
 \newcommand{\mupd}[3]{#1[#2 \mapsto #3]}
-
 \frac{}{\msel{\mupd{m}{k}{v}}{k} = v}
 \quad
 \frac{
@@ -47,7 +45,6 @@ $$
 
 $$
 \newcommand{\denote}[1]{{\llbracket #1 \rrbracket}}
-
 \begin{aligned}
   \denote{n}v &= n \\
   \denote{x}v &= v(x) \\
@@ -62,7 +59,6 @@ $$
 
 $$
 \newcommand{\subst}[3]{[#3/#2]#1}
-
 \begin{aligned}
   \subst{n}{x}{e} &= n \\
   \subst{x}{x}{e} &= e \\
