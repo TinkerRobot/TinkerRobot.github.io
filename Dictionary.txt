@@ -5,7 +5,7 @@ Backus-Naur Form (BNF)  巴科斯——诺尔范式
 conclusion  结论
 concrete syntax  具体语法
 constructor  构造函数
-decidable theory  可判定定理
+decidable theory  可判定理论
 grammar  文法
 induction  归纳
 inductive hypothesis  归纳假设

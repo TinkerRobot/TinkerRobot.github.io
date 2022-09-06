@@ -188,24 +188,129 @@ $$
 
 像这样极度简单的证明往往让初次接触的读者感到惊讶和受挫。我们的观点是，对证明进行检查是一项更适合机器而非人的活动，所以对于上文中以及与本章相关的其它许多定理，我们倾向于在书中省略这些令人厌烦的证明细节，而将它们放在随附的Coq代码中。事实上，即使是发表在论文当中的证明，也倾向于使用像上文一样的简短“证明”，而依赖于读者的经验进行“填空”。因此，在这种论证中经常性地出现逻辑错误，从而导致人们接受了伪定理，也就不足为奇了。出于这个原因，我们在此坚持使用机器检查的证明，书中的章节主要用于介绍概念、推理法则以及陈述关键的定理和引理。
 
-## 2.4 可判定定理
+## 2.4 可判定理论
 
-然而，我们确实需要以某种方式填入所有的证明细节。对我们而言最简单的一种情形是，证明目标能够被归入某个 *可判定定理（decidable theory）*。我们遵循可计算性理论的理解，将一些判定问题视作公式的集合 $F$ （通常是无限集合）与为 *真* 的公式的子集 $T \subseteq F$，并且可能只考虑使用有限的推断规则能够证明的公式。此时，一个判定问题是可 *判定* 的，等价于存在这样一些必然终止的程序：其输入为 $f \in F$，当且仅当 $f \in T$ 时，输出为“true”。定理的可判定性的便利之处在于，只要我们的证明目标属于某个可判定定理的集合 $F$，就可以通过运行必然存在的判定程序来完成。
+然而，我们确实需要以某种方式填入所有的证明细节。对我们而言最简单的一种情形是，证明目标能够被归入某个 *可判定理论（decidable theory）*。我们遵循可计算性理论的理解，将一些判定问题视作公式的集合 $F$ （通常是无限集合）与为 *真* 的公式的子集 $T \subseteq F$，并且可能只考虑使用有限的推断规则能够证明的公式。此时，一个判定问题是可 *判定* 的，等价于存在这样一些必然终止的程序：其输入为 $f \in F$，当且仅当 $f \in T$ 时，输出为“true”。理论的可判定性的便利之处在于，只要我们的证明目标属于某个可判定理论的集合 $F$，就可以通过运行必然存在的判定程序来完成。
 
-一个常见的可判定定理是 *线性运算（linear arithmetic）*，其集合 $F$ 可通过下面的文法 $\phi$ 生成：
+一个常见的可判定理论是 *线性运算（linear arithmetic）*，其集合 $F$ 可通过下面的文法 $\phi$ 生成：
 
 $$
 \begin{aligned}
   \textrm{常量} \quad & n \in \mathbb Z \\
   \textrm{变量} \quad & x \in \mathsf{Strings} \\
-  \textrm{项} \quad & e ::= x \mid n \mid e + e \mid e - e \\
+  \textrm{术语} \quad & e ::= x \mid n \mid e + e \mid e - e \\
   \textrm{命题} \quad & \phi ::= e = e \mid e < e \mid \neg \phi \mid \phi \land \phi
 \end{aligned}
 $$
 
-这里所使用的运算是 *线性（linear）* 的，线性在这里的含义与在 *线性代数* 中的含义一致：即不会对两个含有变量的项使用乘法。
+这里所使用的运算是 *线性（linear）* 的，线性在这里的含义与在 *线性代数* 中的含义一致：即不会对两个含有变量的词语使用乘法。事实上，乘法是被完全禁止的，但我们允许使用与常数的乘法作为重复加法的缩写（从逻辑上而言）。命题是由作用于词语上的相等性测试和小于关系测试组成的，此外还有布尔取反（“not”）运算符 $\neg$ 和连接（“and”）运算符 $\land$。这一组命题运算符足以编码其它常见的不相等和命题运算符，因此我们也允许使用这些运算符作为便捷的缩写。
 
-The arithmetic terms used here are \emph{linear} in the same sense as \emph{linear algebra}\index{linear algebra}: we never multiply together two terms containing variables.
-Actually, multiplication is prohibited outright, but we allow multiplication by a constant as an abbreviation (logically speaking) for repeated addition.
-Propositions are formed out of equality and less-than tests on terms, and we also have the Boolean negation (``not'') operator $\neg$ and conjunction (``and'') operator $\land$.
-This set of propositional\index{propositional logic} operators is enough to encode the other usual inequality and propositional operators, so we allow them, too, as convenient shorthands.
+在Coq这类证明辅助工具中使用可判定理论的重点是理解怎样将一个理论应用到在字面上实际并不满足其语法的的公式中。例如，我们可能试图证明 $f(x) - f(x) = 0$，但一些复杂的函数 $f$ 已经远远超出了上文中语法的定义。然而，我们只需引入一个新的变量 $y$，并且定义等式 $y = f(x)$，即可得到新的证明目标 $y - y = 0$。此时一个线性运算的程序即可轻松地完成这个目标，之后再代入 $y$ 即可得出原本的目标。Coq的策略就是在可判定理论的基础上，替我们做了所有这些艰苦的工作。
+
+另一个重要的可判定理论是关于 *未解释函数的相等性* 的。
+
+$$
+\begin{aligned}
+  \textrm{变量} \quad & x \in \mathsf{Strings} \\
+  \textrm{函数} \quad & f \in \mathsf{Strings} \\
+  \textrm{术语} \quad & e ::= x \mid f(e, \ldots, e) \\
+  \textrm{命题} \quad & \phi ::= e = e \mid \neg \phi \mid \phi \land \phi
+\end{aligned}
+$$
+
+在这个理论中，我们对变量和函数的详细特性一无所知。相反地，我们只能从最基本的相等关系的性质开始推理：
+
+$$
+\mathsf{自反性} \frac{}{e = e}
+\quad 
+\mathsf{对称性} \frac{e_2 = e_1}{e_1 = e_2}
+\quad 
+\mathsf{传递性} \frac{e_1 = e_3 \quad e_3 = e_2}{e_1 = e_2}
+$$
+
+$$
+\mathsf{全等性} \frac{
+  f = f'
+  \quad e_1 = e'_1
+  \quad \ldots
+  \quad e_n = e'_n
+}{f(e_1, \ldots, e_n) = f'(e'_1, \ldots, e'_n)}
+$$
+
+作为可判定理论的另一个例子，让我们来考虑 *半环* 的代数结构，它可以被理解为“类似于自然数的类型”。一个集合如果含有标记为 0 和 1 的两个元素，且对二元运算符 $+$ 和 $\times$ 封闭，那么就是一个半环。这些符号是提示性的，但事实上我们可以自由选择这里的集合、元素和运算符，只要它们满足以下公理[^1]：
+
+[^1]: 这些等式几乎原文来自 [https://en.wikipedia.org/wiki/Semiring](https://en.wikipedia.org/wiki/Semiring)。
+
+$$
+\begin{aligned}
+  (a + b) + c &= a + (b + c) \\
+  0 + a &= a \\
+  a + 0 &= a \\
+  a + b &= b + a \\
+  (a \times b) \times c &= a \times (b \times c) \\
+  1 \times a &= a \\
+  a \times 1 &= a \\
+  a \times (b + c) &= (a \times b) + (a \times c) \\
+  (a + b) \times c &= (a \times c) + (b \times c) \\
+  0 \times a &= 0 \\
+  a \times 0 &= 0
+\end{aligned}
+$$
+
+形式化的理论如下，这里我们只将从上述公理中得到的相等性判定为“真”。
+
+$$
+\begin{aligned}
+  \textrm{变量} \quad & x \in \mathsf{Strings} \\
+  \textrm{术语} \quad & e ::= 0 \mid 1 \mid x \mid e + e \mid e \times e \\
+  \textrm{命题} \quad & \phi ::= e = e
+\end{aligned}
+$$
+
+请注意半环理论和线性运算理论的适用性是不可相比的。也就是说，虽然有些目标可以通过这两种理论中的任意一种证明，但是一些目标只能使用半环理论进行证明，而另一些目标只能使用线性运算理论。例如，我们可以使用半环理论证明 $x(y + z) = xy + xz$，而使用线性运算理论证明 $x - x = 0$。
+
+
+\section{Simplification and Rewriting}
+
+While we leave most proof details to the accompanying Coq code, it does seem important to introduce two key principles that are often implicit in proofs on paper.
+
+The first is \emph{algebraic simplification}\index{algebraic simplification}, where we apply the defining equations of a recursive definition to simplify a goal.
+For example, recall that our definition of expression size included this clause.
+\begin{eqnarray*}
+  \size{\mathsf{Plus}(e_1, e_2)} &=& 1 + \size{e_1} + \size{e_2}
+\end{eqnarray*}
+Now imagine that we are trying to prove this formula.
+$$\size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}$$
+We may apply the defining equation to rewrite into a different formula, where we have essentially pushed the definition of $\size{\cdot}$ through the $\mathsf{Plus}$.
+$$1 + \size{e} + \size{\mathsf{Const}(7)} = 2 + \size{e}$$
+Another application of a different defining equation, this time for $\mathsf{Const}$, takes us to here.
+$$1 + \size{e} + 1 = 2 + \size{e}$$
+From here, the goal follows by linear arithmetic.
+
+\medskip
+
+Such a proof establishes a theorem $\forall e \in \mathsf{Exp}. \; \size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}$.
+We may use already-proved theorems via a more general \emph{rewriting}\index{rewriting} mechanism, applying whenever we know some quantified equality.
+Within a new goal we are proving, we find some subterm that matches the lefthand side of that equality, after we choose the proper values of the quantified variables.
+The process of finding those values automatically is called \emph{unification}\index{unification}.
+Rewriting enables us to take the subterm we found and replace it with the righthand side of the equation.
+
+As an example, assume that, for some $P$, we know $P(2 + \size{\mathsf{Var}(x)})$ and are trying to prove $P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})$.
+We may use our earlier fact to rewrite the argument of $P$ in what we are trying to show, so that it now matches the argument from what we already know, at which point the proof is trivial to finish.
+Here, unification found the assignment $e = \mathsf{Var}(x)$.
+
+\medskip
+
+\encoding
+\label{metalanguage}
+We close the chapter with an important note on terminology.
+A formula like $P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})$ combines several levels of notation.
+We consider that we are doing our mathematical reasoning in some \emph{metalanguage}\index{metalanguage}, which is often applicable to a wide variety of proof tasks.
+We also happen to be applying it here to reason about some \emph{object language}\index{object language}, a programming language whose syntax is defined formally, here the language of arithmetic expressions.
+We have $x$ as a variable of the metalanguage, while $\mathsf{Var}(x)$ is a variable expression of the object language.
+It is difficult to use English to explain the distinction between the two in complete formality, but be on the lookout for places where formulas mix concepts of the metalanguage and object language!
+The general patterns should soon become clear, as they are somehow already familiar to us from natural-language sentences like:
+\begin{quote}
+  The wise man said, ``it is time to prove some theorems.''
+\end{quote}
+The quoted remark could just as well be in Spanish instead of English, in which case we have two languages nested in a nontrivial way.
