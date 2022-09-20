@@ -45,11 +45,11 @@ $$
 \end{aligned}
 $$
 
-用自然语言来描述这个语法：我们首先基于众所周知的自然数和字符串的集合分别定义了常量和变量的集合，随后定义了表达式，包括常量、变量、加法和乘法。重点在于，最后两种情形是 *递归* 定义的：从这个例子中可以看到如何用较小的表达式构建更大的表达式。
+用自然语言来描述这个语法：我们首先基于众所周知的自然数集合和字符串集合分别定义了常量和变量的集合，随后定义了表达式，包括常量、变量、加法和乘法。重点在于，最后两种情形是 *递归* 定义的：从这个例子中可以看到如何用较小的表达式构建更大的表达式。
 
 顺带一提，我们已经在形式化证明的讨论中见到了各种各样的记号。所有这些内容都是使用 $\LaTeX$ 进行排版的，有兴趣的读者可以翻阅本书的TeX源代码，了解这些符号是如何实现的。
 
-*归纳定义（inductive definition）* 是贯穿整个主题最重要的工具之一，它描述了如何在较小的集合的基础上构建更大的集合。上文的文法的递归性质实际上隐式地给出了一个归纳定义。归纳定义的更一般的记法是通过一系列的 *推断规则（inference rule）* 定义一个集合——准确地说，是 *能够满足所有规则* 的最小集合。每个规则都包括 *前提（premise）* 和 *结论（conclusion）*。我们用下面的四条规则来演示，这四条规则等价于上文的BNF文法，共同定义了一个表达式的集合 $\mathsf{Exp}$。
+*归纳定义（inductive definition）* 是贯穿整个主题最重要的工具之一，它描述了如何在较小的集合的基础上构建更大的集合。上文中的文法的递归性质实际上隐式地给出了一个归纳定义，但更一般的记法是通过一系列的 *推断规则（inference rule）* 定义一个集合——准确地说，是 *能够满足所有规则* 的最小集合。每个规则都包括 *前提（premise）* 和 *结论（conclusion）*。我们用下面的四条规则来演示，这四条规则等价于上文的BNF文法，共同定义了一个表达式的集合 $\mathsf{Exp}$。
 
 $$
 \frac{n \in \mathbb N}{n \in \mathsf{Exp}}
@@ -67,7 +67,7 @@ $$
 }{e_1 \times e_2 \in \mathsf{Exp}}
 $$
 
-推断规则的一般读法是：**如果** 横线上方的所有事实都为真，那么横线下方的事实也为真。推断规则默认需要对其中出现的所有 *元变量（metavariable）*（如 $n$和$e1$）的所有值都成立；我们可以用一种更为通用的自顶向下的量化方法来更明确地表示这些变量。初次接触语义的读者在看到这种定义风格时往往不太适应，但大家很快就会发现这是一个能够表达许多概念的十分紧凑的记号。读者可以将其视作一种用于数学定义的特定领域编程语言，这种类比在相关的Coq代码中会变得非常具体。
+推断规则的一般读法是：**如果** 横线上方的所有事实都为真，那么横线下方的事实也为真。推断规则默认需要对其中出现的所有 *元变量（metavariable）*（如 $n$ 和 $e1$）的所有值都成立；我们可以用一种更为通用的自顶向下的量化方法来更明确地表示这些变量。初次接触语义的读者在看到这种定义风格时往往不太适应，但大家很快就会发现这是一个能够表达许多概念的十分紧凑的记号。读者可以将其视作一种用于数学定义的特定领域编程语言，这种类比在相关的Coq代码中会变得非常具体。
 
 ## 2.2 抽象语法
 
@@ -106,7 +106,7 @@ $$
 }{\mathsf{Times}(e_1, e_2) \in \mathsf{Exp}}
 $$
 
-实际上，书写这种冗长的描述让语义学家们不胜其烦，所以文本中的证明往往更倾向于采用我们在书写具体语法时所使用的记法。这就需要我们在大脑中将具体语法的记法解构为抽象语法的符号！一般我们不会详述这一过程的具体细节。相反地，我们会同时使用以抽象语法为起点的Coq代码，以及本书中应用具体语法的基于 $\LaTeX$ “代码”，通过这些例子反复演示这一过程。
+实际上，书写这种冗长的描述让语义学家们不胜其烦，所以书面形式的证明往往更倾向于采用我们在书写具体语法时所使用的记法。这就需要我们在大脑中将具体语法的记法解构为抽象语法的符号！一般我们不会详述这一过程的具体细节。相反地，我们会同时使用以抽象语法为起点的Coq代码，以及本书中应用具体语法的基于 $\LaTeX$ “代码”，通过这些例子反复演示这一过程。
 
 抽象语法十分适用于书写函数的 *递归定义（recursive definition）*。下面是一个Haskell的子句式的函数定义：
 
@@ -147,7 +147,7 @@ $$
 
 ## 2.3 结构化归纳法则
 
-我们更偏好抽象语法的主要原因是，虽然文本字符串 *看上去* 更自然和容易理解，但要对其进行完全形式化的处理时会遇到非常多的困难。相对地，归纳语法树较为容易操作。顾名思义，我们主要想做的操作就是 *归纳（induction）*，这个操作最常出现的场景可能是应用于自然数的 *数学归纳法（mathematical induction）*。在本书中，我们不会过多涉及和自然数有关的证明，而是将自然数视为一个简单的归纳定义的集合，在这个基础上，介绍更具一般性、更强大的 *结构化归纳（structural induction）* 思想，它在形式化的意义上包含了数学归纳法。
+我们更偏好抽象语法的主要原因是，虽然文本字符串 *看上去* 更自然和容易理解，但要对其进行完全形式化的处理时会遇到非常多的困难。相对地，归纳语法树较为容易操作。顾名思义，我们主要想对其执行的操作就是 *归纳（induction）*，这个操作最常出现的场景可能是应用于自然数的 *数学归纳法（mathematical induction）*。在本书中，我们不会过多涉及和自然数有关的证明，而是将自然数视为一个简单的归纳定义的集合，在这个基础上，介绍更具一般性、更强大的 *结构化归纳（structural induction）* 思想，它在形式化的意义上包含了数学归纳法。
 
 我们可以通过一个具有一般性的方法从归纳定义中得出其归纳法则。当我们归纳地定义集合 $S$ 时，我们同时也得到了一个归纳法则，它可以用于证明某个断言 $P$ 对 $S$ 中的所有元素都成立。为了得出这个结论，我们必须对归纳定义的每一条规则履行一次证明义务。回顾上文中我们为 $\mathsf{Exp}$ 的抽象语法所做的基于规则的归纳定义，为了推导出 $\mathsf{Exp}$ 的结构化归纳法则，我们定义一套新的规则，它在原有规则的基础上做了两个关键的修改：
 
@@ -186,7 +186,7 @@ $$
 > 
 > **证明** 对 $e$ 的结构进行归纳可得定理成立。
 
-像这样极度简单的证明往往让初次接触的读者感到惊讶和受挫。我们的观点是，对证明进行检查是一项更适合机器而非人的活动，所以对于上文中以及与本章相关的其它许多定理，我们倾向于在书中省略这些令人厌烦的证明细节，而将它们放在随附的Coq代码中。事实上，即使是发表在论文当中的证明，也倾向于使用像上文一样的简短“证明”，而依赖于读者的经验进行“填空”。因此，在这种论证中经常性地出现逻辑错误，从而导致人们接受了伪定理，也就不足为奇了。出于这个原因，我们在此坚持使用机器检查的证明，书中的章节主要用于介绍概念、推理法则以及陈述关键的定理和引理。
+像这样极度简单的证明往往让初次接触的读者感到惊讶和受挫。我们的观点是，对证明进行检查是一项更适合机器而非人的活动，所以对于上文中以及与本章相关的其它许多定理，我们倾向于在书中省略这些令人厌烦的证明细节，而将它们放在随附的Coq代码中。事实上，即使是以书面形式发表的证明，也倾向于使用像上文一样的简短“证明”，而依赖于读者的经验进行“填空”。因此，在这种论证中经常性地出现逻辑错误，从而导致人们接受了伪定理，也就不足为奇了。出于这个原因，我们在此坚持使用机器检查的证明，书中的章节主要用于介绍概念、推理法则以及陈述关键的定理和引理。
 
 ## 2.4 可判定理论
 
@@ -203,9 +203,9 @@ $$
 \end{aligned}
 $$
 
-这里所使用的运算是 *线性（linear）* 的，线性在这里的含义与在 *线性代数* 中的含义一致：即不会对两个含有变量的词语使用乘法。事实上，乘法是被完全禁止的，但我们允许使用与常数的乘法作为重复加法的缩写（从逻辑上而言）。命题是由作用于词语上的相等性测试和小于关系测试组成的，此外还有布尔取反（“not”）运算符 $\neg$ 和连接（“and”）运算符 $\land$。这一组命题运算符足以编码其它常见的不相等和命题运算符，因此我们也允许使用这些运算符作为便捷的缩写。
+这里所使用的运算是 *线性（linear）* 的，线性在这里的含义与在 *线性代数* 中的含义一致：即不会对两个含有变量的项使用乘法。事实上，乘法是被完全禁止的，但我们允许使用与常数的乘法作为重复加法的缩写（从逻辑上而言）。命题是由作用于词语上的相等性测试和小于关系测试组成的，此外还有布尔取反（“not”）运算符 $\neg$ 和连接（“and”）运算符 $\land$。这一组命题运算符足以编码其它常见的不相等和命题运算符，因此我们也允许使用这些运算符作为便捷的缩写。
 
-在Coq这类证明辅助工具中使用可判定理论的重点是理解怎样将一个理论应用到在字面上实际并不满足其语法的的公式中。例如，我们可能试图证明 $f(x) - f(x) = 0$，但一些复杂的函数 $f$ 已经远远超出了上文中语法的定义。然而，我们只需引入一个新的变量 $y$，并且定义等式 $y = f(x)$，即可得到新的证明目标 $y - y = 0$。此时一个线性运算的程序即可轻松地完成这个目标，之后再代入 $y$ 即可得出原本的目标。Coq的策略就是在可判定理论的基础上，替我们做了所有这些艰苦的工作。
+在Coq这类证明辅助工具中使用可判定理论的重点是理解怎样将一个理论应用到在字面上实际并不满足其语法的的公式中。例如，我们可能试图证明 $f(x) - f(x) = 0$，但一些复杂的函数 $f$ 已经远远超出了上文中语法的定义。然而，我们只需引入一个新的变量 $y$，并且定义等式 $y = f(x)$，即可得到新的证明目标 $y - y = 0$。此时一个线性运算的过程即可轻松地完成这个目标，之后再代入 $y$ 即可得出原本的目标。Coq的策略就是在可判定理论的基础上，替我们做了所有这些艰苦的工作。
 
 另一个重要的可判定理论是关于 *未解释函数的相等性* 的。
 
@@ -269,48 +269,44 @@ $$
 
 请注意半环理论和线性运算理论的适用性是不可相比的。也就是说，虽然有些目标可以通过这两种理论中的任意一种证明，但是一些目标只能使用半环理论进行证明，而另一些目标只能使用线性运算理论。例如，我们可以使用半环理论证明 $x(y + z) = xy + xz$，而使用线性运算理论证明 $x - x = 0$。
 
+## 2.5 化简与改写
 
-\section{Simplification and Rewriting}
+虽然我们将大部分证明细节放在随附的Coq代码当中，但其中有两个关键的证明法则十分重要。它们常常被隐含在书面证明中，因此值得我们花费一节的篇幅对其进行介绍。
 
-While we leave most proof details to the accompanying Coq code, it does seem important to introduce two key principles that are often implicit in proofs on paper.
+首先是 *代数化简（algebraic simplification）* 法则，即使用递归定义的定义式对目标进行化简。例如，回顾一下，我们对表达式的 $size$ 函数的定义包括下面这个子句：
 
-The first is \emph{algebraic simplification}\index{algebraic simplification}, where we apply the defining equations of a recursive definition to simplify a goal.
-For example, recall that our definition of expression size included this clause.
-\begin{eqnarray*}
-  \size{\mathsf{Plus}(e_1, e_2)} &=& 1 + \size{e_1} + \size{e_2}
-\end{eqnarray*}
-Now imagine that we are trying to prove this formula.
-$$\size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}$$
-We may apply the defining equation to rewrite into a different formula, where we have essentially pushed the definition of $\size{\cdot}$ through the $\mathsf{Plus}$.
-$$1 + \size{e} + \size{\mathsf{Const}(7)} = 2 + \size{e}$$
-Another application of a different defining equation, this time for $\mathsf{Const}$, takes us to here.
-$$1 + \size{e} + 1 = 2 + \size{e}$$
-From here, the goal follows by linear arithmetic.
+$$
+\newcommand{\size}[1]{\lvert #1 \rvert}
+\begin{aligned}
+    \size{\mathsf{Plus}(e_1, e_2)} &= 1 + \size{e_1} + \size{e_2}
+\end{aligned}
+$$
 
-\medskip
+现在，假设我们试图证明下面这个公式：
 
-Such a proof establishes a theorem $\forall e \in \mathsf{Exp}. \; \size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}$.
-We may use already-proved theorems via a more general \emph{rewriting}\index{rewriting} mechanism, applying whenever we know some quantified equality.
-Within a new goal we are proving, we find some subterm that matches the lefthand side of that equality, after we choose the proper values of the quantified variables.
-The process of finding those values automatically is called \emph{unification}\index{unification}.
-Rewriting enables us to take the subterm we found and replace it with the righthand side of the equation.
+$$
+\newcommand{\size}[1]{\lvert #1 \rvert}
+\size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}
+$$
 
-As an example, assume that, for some $P$, we know $P(2 + \size{\mathsf{Var}(x)})$ and are trying to prove $P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})$.
-We may use our earlier fact to rewrite the argument of $P$ in what we are trying to show, so that it now matches the argument from what we already know, at which point the proof is trivial to finish.
-Here, unification found the assignment $e = \mathsf{Var}(x)$.
+我们可以应用上文的定义等式改写这个式子，只需将 $\newcommand{\size}[1]{\lvert #1 \rvert} \size{\cdot}$ 的定义在 $\mathsf{Plus}$ 上展开：
 
-\medskip
+$$
+\newcommand{\size}[1]{\lvert #1 \rvert}
+1 + \size{e} + \size{\mathsf{Const}(7)} = 2 + \size{e}
+$$
 
-\encoding
-\label{metalanguage}
-We close the chapter with an important note on terminology.
-A formula like $P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})$ combines several levels of notation.
-We consider that we are doing our mathematical reasoning in some \emph{metalanguage}\index{metalanguage}, which is often applicable to a wide variety of proof tasks.
-We also happen to be applying it here to reason about some \emph{object language}\index{object language}, a programming language whose syntax is defined formally, here the language of arithmetic expressions.
-We have $x$ as a variable of the metalanguage, while $\mathsf{Var}(x)$ is a variable expression of the object language.
-It is difficult to use English to explain the distinction between the two in complete formality, but be on the lookout for places where formulas mix concepts of the metalanguage and object language!
-The general patterns should soon become clear, as they are somehow already familiar to us from natural-language sentences like:
-\begin{quote}
-  The wise man said, ``it is time to prove some theorems.''
-\end{quote}
-The quoted remark could just as well be in Spanish instead of English, in which case we have two languages nested in a nontrivial way.
+现在应用另一个定义等式，这次作用在 $\mathsf{Const}$，从而得到：
+
+$$
+\newcommand{\size}[1]{\lvert #1 \rvert}
+1 + \size{e} + 1 = 2 + \size{e}
+$$
+
+至此，我们就可以通过线性运算得出目标。
+
+上述证明构造了一个定理：$\newcommand{\size}[1]{\lvert #1 \rvert} \forall e \in \mathsf{Exp}. \; \size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}$。我们可以通过一个更一般的 *改写（rewriting）* 机制来使用已经被证明的定理，只要有一些已知的量化相等关系就可以应用这一机制。在为关系中的量化变量选择了合适的值之后，我们便有可能在待证的新目标中找到能与相等关系的等式左侧相匹配的子项。自动化寻找这些值的过程，被称作 *统一化（unification）*。改写机制允许我们使用等式右侧替代找到的子项。
+
+举例来说，假设对于某个断言 $P$，我们已经知道 $\newcommand{\size}[1]{\lvert #1 \rvert} P(2 + \size{\mathsf{Var}(x)})$，现在我们试图证明 $\newcommand{\size}[1]{\lvert #1 \rvert} P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})$。我们可以使用之前得到的结论，重写我们试图证明的命题 $P$ 中的参数，使之匹配我们已知的参数的形式，之后的证明就变得平凡了。在这个例子里，统一化作用的对象是 $e = \mathsf{Var}(x)$。
+
+在本章的最后，我们对术语做一个重要的说明。诸如 $\newcommand{\size}[1]{\lvert #1 \rvert} P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})$ 一类的公式结合了多个层次的记号。对此我们的理解是，我们是在某种 *元语言（metalanguage）* 上进行数学推理，这种语言通常适用于各种证明任务。我们只是恰好将其应用于对某些 *对象语言（object language）* 进行推理。这里的对象语言指是指拥有形式化定义的语法的编程语言，例如本章中的算数表达式。在这个例子里，$x$ 是元语言的变量，而 $\mathsf{Var}(x)$ 是对象语言的一个变量表达式。我们很难用语言对这两者之间的区别做一个完全形式化的阐述，但请注意公式中混合了元语言与对象语言概念的部分！
