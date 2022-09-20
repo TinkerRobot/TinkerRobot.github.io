@@ -29,7 +29,7 @@
 <meta property="og:description" content="程序的定义始于编程语言的定义，而编程语言的定义又始于其 语法（syntax） 的定义。语法规定了哪些短语是符合其规定的。我们会在后面的章节中再讨论 语义（semantics），也就是程序的 含义，在这一过程中我们将应用更多的正确性条件。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-19T17:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-06T12:58:31.577Z">
+<meta property="article:modified_time" content="2022-09-20T09:12:13.420Z">
 <meta property="article:author" content="TinkerRobot">
 <meta property="article:tag" content="FRAP">
 <meta property="article:tag" content="形式化验证">
@@ -126,7 +126,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">2.1 具体语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.2 抽象语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E5%BD%92%E7%BA%B3%E6%B3%95%E5%88%99"><span class="nav-number">3.</span> <span class="nav-text">2.3 结构化归纳法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%88%A4%E5%AE%9A%E5%AE%9A%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">2.4 可判定定理</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">2.1 具体语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.2 抽象语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E5%BD%92%E7%BA%B3%E6%B3%95%E5%88%99"><span class="nav-number">3.</span> <span class="nav-text">2.3 结构化归纳法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E5%88%A4%E5%AE%9A%E7%90%86%E8%AE%BA"><span class="nav-number">4.</span> <span class="nav-text">2.4 可判定理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%96%E7%AE%80%E4%B8%8E%E6%94%B9%E5%86%99"><span class="nav-number">5.</span> <span class="nav-text">2.5 化简与改写</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -243,7 +243,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-06 20:58:31" itemprop="dateModified" datetime="2022-09-06T20:58:31+08:00">2022-09-06</time>
+      <time title="修改时间：2022-09-20 17:12:13" itemprop="dateModified" datetime="2022-09-20T17:12:13+08:00">2022-09-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,9 +292,9 @@
   \textrm{表达式} \quad &amp; e ::= n \mid x \mid e + e \mid e \times e
 \end{aligned}
 \]</span></p>
-<p>用自然语言来描述这个语法：我们首先基于众所周知的自然数和字符串的集合分别定义了常量和变量的集合，随后定义了表达式，包括常量、变量、加法和乘法。重点在于，最后两种情形是 <em>递归</em> 定义的：从这个例子中可以看到如何用较小的表达式构建更大的表达式。</p>
+<p>用自然语言来描述这个语法：我们首先基于众所周知的自然数集合和字符串集合分别定义了常量和变量的集合，随后定义了表达式，包括常量、变量、加法和乘法。重点在于，最后两种情形是 <em>递归</em> 定义的：从这个例子中可以看到如何用较小的表达式构建更大的表达式。</p>
 <p>顺带一提，我们已经在形式化证明的讨论中见到了各种各样的记号。所有这些内容都是使用 <span class="math inline">\(\LaTeX\)</span> 进行排版的，有兴趣的读者可以翻阅本书的TeX源代码，了解这些符号是如何实现的。</p>
-<p><em>归纳定义（inductive definition）</em> 是贯穿整个主题最重要的工具之一，它描述了如何在较小的集合的基础上构建更大的集合。上文的文法的递归性质实际上隐式地给出了一个归纳定义。归纳定义的更一般的记法是通过一系列的 <em>推断规则（inference rule）</em> 定义一个集合——准确地说，是 <em>能够满足所有规则</em> 的最小集合。每个规则都包括 <em>前提（premise）</em> 和 <em>结论（conclusion）</em>。我们用下面的四条规则来演示，这四条规则等价于上文的BNF文法，共同定义了一个表达式的集合 <span class="math inline">\(\mathsf{Exp}\)</span>。</p>
+<p><em>归纳定义（inductive definition）</em> 是贯穿整个主题最重要的工具之一，它描述了如何在较小的集合的基础上构建更大的集合。上文中的文法的递归性质实际上隐式地给出了一个归纳定义，但更一般的记法是通过一系列的 <em>推断规则（inference rule）</em> 定义一个集合——准确地说，是 <em>能够满足所有规则</em> 的最小集合。每个规则都包括 <em>前提（premise）</em> 和 <em>结论（conclusion）</em>。我们用下面的四条规则来演示，这四条规则等价于上文的BNF文法，共同定义了一个表达式的集合 <span class="math inline">\(\mathsf{Exp}\)</span>。</p>
 <p><span class="math display">\[
 \frac{n \in \mathbb N}{n \in \mathsf{Exp}}
 \quad 
@@ -310,7 +310,7 @@
   \quad e_2 \in \mathsf{Exp}
 }{e_1 \times e_2 \in \mathsf{Exp}}
 \]</span></p>
-<p>推断规则的一般读法是：<strong>如果</strong> 横线上方的所有事实都为真，那么横线下方的事实也为真。推断规则默认需要对其中出现的所有 <em>元变量（metavariable）</em>（如 <span class="math inline">\(n\)</span>和<span class="math inline">\(e1\)</span>）的所有值都成立；我们可以用一种更为通用的自顶向下的量化方法来更明确地表示这些变量。初次接触语义的读者在看到这种定义风格时往往不太适应，但大家很快就会发现这是一个能够表达许多概念的十分紧凑的记号。读者可以将其视作一种用于数学定义的特定领域编程语言，这种类比在相关的Coq代码中会变得非常具体。</p>
+<p>推断规则的一般读法是：<strong>如果</strong> 横线上方的所有事实都为真，那么横线下方的事实也为真。推断规则默认需要对其中出现的所有 <em>元变量（metavariable）</em>（如 <span class="math inline">\(n\)</span> 和 <span class="math inline">\(e1\)</span>）的所有值都成立；我们可以用一种更为通用的自顶向下的量化方法来更明确地表示这些变量。初次接触语义的读者在看到这种定义风格时往往不太适应，但大家很快就会发现这是一个能够表达许多概念的十分紧凑的记号。读者可以将其视作一种用于数学定义的特定领域编程语言，这种类比在相关的Coq代码中会变得非常具体。</p>
 <h2 id="抽象语法">2.2 抽象语法</h2>
 <p>在简单介绍了具体语法之后，本书余下的部分将不再对其进行形式化的讨论。相反，我们转向关注语言定义的真正核心内容，<em>抽象语法（abstract syntax）</em>。从现在开始，程序变成了 <em>抽象语法树</em>（<em>abstract syntax trees，AST</em>），对应于Coq中的归纳类型定义或者Haskell中的代数数据类型定义。我们可以通过枚举带有类型的 <em>构造函数（constructor）</em> 来定义这些类型。</p>
 <p><span class="math display">\[
@@ -342,7 +342,7 @@
   \quad e_2 \in \mathsf{Exp}
 }{\mathsf{Times}(e_1, e_2) \in \mathsf{Exp}}
 \]</span></p>
-<p>实际上，书写这种冗长的描述让语义学家们不胜其烦，所以文本中的证明往往更倾向于采用我们在书写具体语法时所使用的记法。这就需要我们在大脑中将具体语法的记法解构为抽象语法的符号！一般我们不会详述这一过程的具体细节。相反地，我们会同时使用以抽象语法为起点的Coq代码，以及本书中应用具体语法的基于 <span class="math inline">\(\LaTeX\)</span> “代码”，通过这些例子反复演示这一过程。</p>
+<p>实际上，书写这种冗长的描述让语义学家们不胜其烦，所以书面形式的证明往往更倾向于采用我们在书写具体语法时所使用的记法。这就需要我们在大脑中将具体语法的记法解构为抽象语法的符号！一般我们不会详述这一过程的具体细节。相反地，我们会同时使用以抽象语法为起点的Coq代码，以及本书中应用具体语法的基于 <span class="math inline">\(\LaTeX\)</span> “代码”，通过这些例子反复演示这一过程。</p>
 <p>抽象语法十分适用于书写函数的 <em>递归定义（recursive definition）</em>。下面是一个Haskell的子句式的函数定义：</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -374,7 +374,7 @@
 \end{aligned}
 \]</span></p>
 <h2 id="结构化归纳法则">2.3 结构化归纳法则</h2>
-<p>我们更偏好抽象语法的主要原因是，虽然文本字符串 <em>看上去</em> 更自然和容易理解，但要对其进行完全形式化的处理时会遇到非常多的困难。相对地，归纳语法树较为容易操作。顾名思义，我们主要想做的操作就是 <em>归纳（induction）</em>，这个操作最常出现的场景可能是应用于自然数的 <em>数学归纳法（mathematical induction）</em>。在本书中，我们不会过多涉及和自然数有关的证明，而是将自然数视为一个简单的归纳定义的集合，在这个基础上，介绍更具一般性、更强大的 <em>结构化归纳（structural induction）</em> 思想，它在形式化的意义上包含了数学归纳法。</p>
+<p>我们更偏好抽象语法的主要原因是，虽然文本字符串 <em>看上去</em> 更自然和容易理解，但要对其进行完全形式化的处理时会遇到非常多的困难。相对地，归纳语法树较为容易操作。顾名思义，我们主要想对其执行的操作就是 <em>归纳（induction）</em>，这个操作最常出现的场景可能是应用于自然数的 <em>数学归纳法（mathematical induction）</em>。在本书中，我们不会过多涉及和自然数有关的证明，而是将自然数视为一个简单的归纳定义的集合，在这个基础上，介绍更具一般性、更强大的 <em>结构化归纳（structural induction）</em> 思想，它在形式化的意义上包含了数学归纳法。</p>
 <p>我们可以通过一个具有一般性的方法从归纳定义中得出其归纳法则。当我们归纳地定义集合 <span class="math inline">\(S\)</span> 时，我们同时也得到了一个归纳法则，它可以用于证明某个断言 <span class="math inline">\(P\)</span> 对 <span class="math inline">\(S\)</span> 中的所有元素都成立。为了得出这个结论，我们必须对归纳定义的每一条规则履行一次证明义务。回顾上文中我们为 <span class="math inline">\(\mathsf{Exp}\)</span> 的抽象语法所做的基于规则的归纳定义，为了推导出 <span class="math inline">\(\mathsf{Exp}\)</span> 的结构化归纳法则，我们定义一套新的规则，它在原有规则的基础上做了两个关键的修改：</p>
 <ol type="1">
 <li>将所有形式满足 <span class="math inline">\(E \in S\)</span> 的结论 <span class="math inline">\(E\)</span> 替换为结论 <span class="math inline">\(P(E)\)</span>。也就是说，证明义务要求 <em>证明</em> <span class="math inline">\(P\)</span> 对特定的项能够成立。</li>
@@ -407,20 +407,104 @@
 <p><strong>定理2.1.</strong> 对任意 <span class="math inline">\(e \in \mathsf{Exp}\)</span>, <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} \newcommand{\depth}[1]{\lceil #1 \rceil} \depth{e} \leq \size{e}\)</span>.</p>
 <p><strong>证明</strong> 对 <span class="math inline">\(e\)</span> 的结构进行归纳可得定理成立。</p>
 </blockquote>
-<p>像这样极度简单的证明往往让初次接触的读者感到惊讶和受挫。我们的观点是，对证明进行检查是一项更适合机器而非人的活动，所以对于上文中以及与本章相关的其它许多定理，我们倾向于在书中省略这些令人厌烦的证明细节，而将它们放在随附的Coq代码中。事实上，即使是发表在论文当中的证明，也倾向于使用像上文一样的简短“证明”，而依赖于读者的经验进行“填空”。因此，在这种论证中经常性地出现逻辑错误，从而导致人们接受了伪定理，也就不足为奇了。出于这个原因，我们在此坚持使用机器检查的证明，书中的章节主要用于介绍概念、推理法则以及陈述关键的定理和引理。</p>
-<h2 id="可判定定理">2.4 可判定定理</h2>
-<p>然而，我们确实需要以某种方式填入所有的证明细节。对我们而言最简单的一种情形是，证明目标能够被归入某个 <em>可判定定理（decidable theory）</em>。我们遵循可计算性理论的理解，将一些判定问题视作公式的集合 <span class="math inline">\(F\)</span> （通常是无限集合）与为 <em>真</em> 的公式的子集 <span class="math inline">\(T \subseteq F\)</span>，并且可能只考虑使用有限的推断规则能够证明的公式。此时，一个判定问题是可 <em>判定</em> 的，等价于存在这样一些必然终止的程序：其输入为 <span class="math inline">\(f \in F\)</span>，当且仅当 <span class="math inline">\(f \in T\)</span> 时，输出为“true”。定理的可判定性的便利之处在于，只要我们的证明目标属于某个可判定定理的集合 <span class="math inline">\(F\)</span>，就可以通过运行必然存在的判定程序来完成。</p>
-<p>一个常见的可判定定理是 <em>线性运算（linear arithmetic）</em>，其集合 <span class="math inline">\(F\)</span> 可通过下面的文法 <span class="math inline">\(\phi\)</span> 生成：</p>
+<p>像这样极度简单的证明往往让初次接触的读者感到惊讶和受挫。我们的观点是，对证明进行检查是一项更适合机器而非人的活动，所以对于上文中以及与本章相关的其它许多定理，我们倾向于在书中省略这些令人厌烦的证明细节，而将它们放在随附的Coq代码中。事实上，即使是以书面形式发表的证明，也倾向于使用像上文一样的简短“证明”，而依赖于读者的经验进行“填空”。因此，在这种论证中经常性地出现逻辑错误，从而导致人们接受了伪定理，也就不足为奇了。出于这个原因，我们在此坚持使用机器检查的证明，书中的章节主要用于介绍概念、推理法则以及陈述关键的定理和引理。</p>
+<h2 id="可判定理论">2.4 可判定理论</h2>
+<p>然而，我们确实需要以某种方式填入所有的证明细节。对我们而言最简单的一种情形是，证明目标能够被归入某个 <em>可判定理论（decidable theory）</em>。我们遵循可计算性理论的理解，将一些判定问题视作公式的集合 <span class="math inline">\(F\)</span> （通常是无限集合）与为 <em>真</em> 的公式的子集 <span class="math inline">\(T \subseteq F\)</span>，并且可能只考虑使用有限的推断规则能够证明的公式。此时，一个判定问题是可 <em>判定</em> 的，等价于存在这样一些必然终止的程序：其输入为 <span class="math inline">\(f \in F\)</span>，当且仅当 <span class="math inline">\(f \in T\)</span> 时，输出为“true”。理论的可判定性的便利之处在于，只要我们的证明目标属于某个可判定理论的集合 <span class="math inline">\(F\)</span>，就可以通过运行必然存在的判定程序来完成。</p>
+<p>一个常见的可判定理论是 <em>线性运算（linear arithmetic）</em>，其集合 <span class="math inline">\(F\)</span> 可通过下面的文法 <span class="math inline">\(\phi\)</span> 生成：</p>
 <p><span class="math display">\[
 \begin{aligned}
   \textrm{常量} \quad &amp; n \in \mathbb Z \\
   \textrm{变量} \quad &amp; x \in \mathsf{Strings} \\
-  \textrm{项} \quad &amp; e ::= x \mid n \mid e + e \mid e - e \\
+  \textrm{术语} \quad &amp; e ::= x \mid n \mid e + e \mid e - e \\
   \textrm{命题} \quad &amp; \phi ::= e = e \mid e &lt; e \mid \neg \phi \mid \phi \land \phi
 \end{aligned}
 \]</span></p>
-<p>这里所使用的运算是 <em>线性（linear）</em> 的，线性在这里的含义与在 <em>线性代数</em> 中的含义一致：即不会对两个含有变量的项使用乘法。</p>
-<p>The arithmetic terms used here are  in the same sense as : we never multiply together two terms containing variables. Actually, multiplication is prohibited outright, but we allow multiplication by a constant as an abbreviation (logically speaking) for repeated addition. Propositions are formed out of equality and less-than tests on terms, and we also have the Boolean negation (<code>not'') operator $\neg$ and conjunction (</code>and'') operator <span class="math inline">\(\land\)</span>. This set of propositional operators is enough to encode the other usual inequality and propositional operators, so we allow them, too, as convenient shorthands.</p>
+<p>这里所使用的运算是 <em>线性（linear）</em> 的，线性在这里的含义与在 <em>线性代数</em> 中的含义一致：即不会对两个含有变量的项使用乘法。事实上，乘法是被完全禁止的，但我们允许使用与常数的乘法作为重复加法的缩写（从逻辑上而言）。命题是由作用于词语上的相等性测试和小于关系测试组成的，此外还有布尔取反（“not”）运算符 <span class="math inline">\(\neg\)</span> 和连接（“and”）运算符 <span class="math inline">\(\land\)</span>。这一组命题运算符足以编码其它常见的不相等和命题运算符，因此我们也允许使用这些运算符作为便捷的缩写。</p>
+<p>在Coq这类证明辅助工具中使用可判定理论的重点是理解怎样将一个理论应用到在字面上实际并不满足其语法的的公式中。例如，我们可能试图证明 <span class="math inline">\(f(x) - f(x) = 0\)</span>，但一些复杂的函数 <span class="math inline">\(f\)</span> 已经远远超出了上文中语法的定义。然而，我们只需引入一个新的变量 <span class="math inline">\(y\)</span>，并且定义等式 <span class="math inline">\(y = f(x)\)</span>，即可得到新的证明目标 <span class="math inline">\(y - y = 0\)</span>。此时一个线性运算的过程即可轻松地完成这个目标，之后再代入 <span class="math inline">\(y\)</span> 即可得出原本的目标。Coq的策略就是在可判定理论的基础上，替我们做了所有这些艰苦的工作。</p>
+<p>另一个重要的可判定理论是关于 <em>未解释函数的相等性</em> 的。</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \textrm{变量} \quad &amp; x \in \mathsf{Strings} \\
+  \textrm{函数} \quad &amp; f \in \mathsf{Strings} \\
+  \textrm{术语} \quad &amp; e ::= x \mid f(e, \ldots, e) \\
+  \textrm{命题} \quad &amp; \phi ::= e = e \mid \neg \phi \mid \phi \land \phi
+\end{aligned}
+\]</span></p>
+<p>在这个理论中，我们对变量和函数的详细特性一无所知。相反地，我们只能从最基本的相等关系的性质开始推理：</p>
+<p><span class="math display">\[
+\mathsf{自反性} \frac{}{e = e}
+\quad 
+\mathsf{对称性} \frac{e_2 = e_1}{e_1 = e_2}
+\quad 
+\mathsf{传递性} \frac{e_1 = e_3 \quad e_3 = e_2}{e_1 = e_2}
+\]</span></p>
+<p><span class="math display">\[
+\mathsf{全等性} \frac{
+  f = f&#39;
+  \quad e_1 = e&#39;_1
+  \quad \ldots
+  \quad e_n = e&#39;_n
+}{f(e_1, \ldots, e_n) = f&#39;(e&#39;_1, \ldots, e&#39;_n)}
+\]</span></p>
+<p>作为可判定理论的另一个例子，让我们来考虑 <em>半环</em> 的代数结构，它可以被理解为“类似于自然数的类型”。一个集合如果含有标记为 0 和 1 的两个元素，且对二元运算符 <span class="math inline">\(+\)</span> 和 <span class="math inline">\(\times\)</span> 封闭，那么就是一个半环。这些符号是提示性的，但事实上我们可以自由选择这里的集合、元素和运算符，只要它们满足以下公理<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+  (a + b) + c &amp;= a + (b + c) \\
+  0 + a &amp;= a \\
+  a + 0 &amp;= a \\
+  a + b &amp;= b + a \\
+  (a \times b) \times c &amp;= a \times (b \times c) \\
+  1 \times a &amp;= a \\
+  a \times 1 &amp;= a \\
+  a \times (b + c) &amp;= (a \times b) + (a \times c) \\
+  (a + b) \times c &amp;= (a \times c) + (b \times c) \\
+  0 \times a &amp;= 0 \\
+  a \times 0 &amp;= 0
+\end{aligned}
+\]</span></p>
+<p>形式化的理论如下，这里我们只将从上述公理中得到的相等性判定为“真”。</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \textrm{变量} \quad &amp; x \in \mathsf{Strings} \\
+  \textrm{术语} \quad &amp; e ::= 0 \mid 1 \mid x \mid e + e \mid e \times e \\
+  \textrm{命题} \quad &amp; \phi ::= e = e
+\end{aligned}
+\]</span></p>
+<p>请注意半环理论和线性运算理论的适用性是不可相比的。也就是说，虽然有些目标可以通过这两种理论中的任意一种证明，但是一些目标只能使用半环理论进行证明，而另一些目标只能使用线性运算理论。例如，我们可以使用半环理论证明 <span class="math inline">\(x(y + z) = xy + xz\)</span>，而使用线性运算理论证明 <span class="math inline">\(x - x = 0\)</span>。</p>
+<h2 id="化简与改写">2.5 化简与改写</h2>
+<p>虽然我们将大部分证明细节放在随附的Coq代码当中，但其中有两个关键的证明法则十分重要。它们常常被隐含在书面证明中，因此值得我们花费一节的篇幅对其进行介绍。</p>
+<p>首先是 <em>代数化简（algebraic simplification）</em> 法则，即使用递归定义的定义式对目标进行化简。例如，回顾一下，我们对表达式的 <span class="math inline">\(size\)</span> 函数的定义包括下面这个子句：</p>
+<p><span class="math display">\[
+\newcommand{\size}[1]{\lvert #1 \rvert}
+\begin{aligned}
+    \size{\mathsf{Plus}(e_1, e_2)} &amp;= 1 + \size{e_1} + \size{e_2}
+\end{aligned}
+\]</span></p>
+<p>现在，假设我们试图证明下面这个公式：</p>
+<p><span class="math display">\[
+\newcommand{\size}[1]{\lvert #1 \rvert}
+\size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}
+\]</span></p>
+<p>我们可以应用上文的定义等式改写这个式子，只需将 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} \size{\cdot}\)</span> 的定义在 <span class="math inline">\(\mathsf{Plus}\)</span> 上展开：</p>
+<p><span class="math display">\[
+\newcommand{\size}[1]{\lvert #1 \rvert}
+1 + \size{e} + \size{\mathsf{Const}(7)} = 2 + \size{e}
+\]</span></p>
+<p>现在应用另一个定义等式，这次作用在 <span class="math inline">\(\mathsf{Const}\)</span>，从而得到：</p>
+<p><span class="math display">\[
+\newcommand{\size}[1]{\lvert #1 \rvert}
+1 + \size{e} + 1 = 2 + \size{e}
+\]</span></p>
+<p>至此，我们就可以通过线性运算得出目标。</p>
+<p>上述证明构造了一个定理：<span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} \forall e \in \mathsf{Exp}. \; \size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}\)</span>。我们可以通过一个更一般的 <em>改写（rewriting）</em> 机制来使用已经被证明的定理，只要有一些已知的量化相等关系就可以应用这一机制。在为关系中的量化变量选择了合适的值之后，我们便有可能在待证的新目标中找到能与相等关系的等式左侧相匹配的子项。自动化寻找这些值的过程，被称作 <em>统一化（unification）</em>。改写机制允许我们使用等式右侧替代找到的子项。</p>
+<p>举例来说，假设对于某个断言 <span class="math inline">\(P\)</span>，我们已经知道 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} P(2 + \size{\mathsf{Var}(x)})\)</span>，现在我们试图证明 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})\)</span>。我们可以使用之前得到的结论，重写我们试图证明的命题 <span class="math inline">\(P\)</span> 中的参数，使之匹配我们已知的参数的形式，之后的证明就变得平凡了。在这个例子里，统一化作用的对象是 <span class="math inline">\(e = \mathsf{Var}(x)\)</span>。</p>
+<p>在本章的最后，我们对术语做一个重要的说明。诸如 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})\)</span> 一类的公式结合了多个层次的记号。对此我们的理解是，我们是在某种 <em>元语言（metalanguage）</em> 上进行数学推理，这种语言通常适用于各种证明任务。我们只是恰好将其应用于对某些 <em>对象语言（object language）</em> 进行推理。这里的对象语言指是指拥有形式化定义的语法的编程语言，例如本章中的算数表达式。在这个例子里，<span class="math inline">\(x\)</span> 是元语言的变量，而 <span class="math inline">\(\mathsf{Var}(x)\)</span> 是对象语言的一个变量表达式。我们很难用语言对这两者之间的区别做一个完全形式化的阐述，但请注意公式中混合了元语言与对象语言概念的部分！</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>这些等式几乎原文来自 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Semiring">https://en.wikipedia.org/wiki/Semiring</a>。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
     </div>
 
