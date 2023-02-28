@@ -54,7 +54,7 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-</head>
+<!-- hexo injector head_end start --><script src="https://unpkg.com/mahgen/dist/index.umd.js"></script><!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -265,7 +265,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>程序的定义始于编程语言的定义，而编程语言的定义又始于其 <em>语法（syntax）</em> 的定义。语法规定了哪些短语是符合其规定的。我们会在后面的章节中再讨论 <em>语义（semantics）</em>，也就是程序的 <em>含义</em>，在这一过程中我们将应用更多的正确性条件。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>程序的定义始于编程语言的定义，而编程语言的定义又始于其 <em>语法（syntax）</em> 的定义。语法规定了哪些短语是符合其规定的。我们会在后面的章节中再讨论 <em>语义（semantics）</em>，也就是程序的 <em>含义</em>，在这一过程中我们将应用更多的正确性条件。</p>
 <span id="more"></span>
 <h2 id="具体语法">2.1 具体语法</h2>
 <p>让我们转到具体的例子上，首先值得关注的是 <em>具体语法</em>，它规定了哪些字符序列是可以被接受的。对于下面这个简单的语言——算数表达式，以下的字符串都是合法的：</p>
@@ -446,7 +446,7 @@
   \quad e_n = e&#39;_n
 }{f(e_1, \ldots, e_n) = f&#39;(e&#39;_1, \ldots, e&#39;_n)}
 \]</span></p>
-<p>作为可判定理论的另一个例子，让我们来考虑 <em>半环</em> 的代数结构，它可以被理解为“类似于自然数的类型”。一个集合如果含有标记为 0 和 1 的两个元素，且对二元运算符 <span class="math inline">\(+\)</span> 和 <span class="math inline">\(\times\)</span> 封闭，那么就是一个半环。这些符号是提示性的，但事实上我们可以自由选择这里的集合、元素和运算符，只要它们满足以下公理<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>：</p>
+<p>作为可判定理论的另一个例子，让我们来考虑 <em>半环</em> 的代数结构，它可以被理解为“类似于自然数的类型”。一个集合如果含有标记为 0 和 1 的两个元素，且对二元运算符 <span class="math inline">\(+\)</span> 和 <span class="math inline">\(\times\)</span> 封闭，那么就是一个半环。这些符号是提示性的，但事实上我们可以自由选择这里的集合、元素和运算符，只要它们满足以下公理<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这些等式几乎原文来自 [https://en.wikipedia.org/wiki/Semiring](https://en.wikipedia.org/wiki/Semiring)。">1</span></a></sup>：</p>
 <p><span class="math display">\[
 \begin{aligned}
   (a + b) + c &amp;= a + (b + c) \\
@@ -498,13 +498,17 @@
 <p>至此，我们就可以通过线性运算得出目标。</p>
 <p>上述证明构造了一个定理：<span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} \forall e \in \mathsf{Exp}. \; \size{\mathsf{Plus}(e, \mathsf{Const}(7))} = 2 + \size{e}\)</span>。我们可以通过一个更一般的 <em>改写（rewriting）</em> 机制来使用已经被证明的定理，只要有一些已知的量化相等关系就可以应用这一机制。在为关系中的量化变量选择了合适的值之后，我们便有可能在待证的新目标中找到能与相等关系的等式左侧相匹配的子项。自动化寻找这些值的过程，被称作 <em>统一化（unification）</em>。改写机制允许我们使用等式右侧替代找到的子项。</p>
 <p>举例来说，假设对于某个断言 <span class="math inline">\(P\)</span>，我们已经知道 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} P(2 + \size{\mathsf{Var}(x)})\)</span>，现在我们试图证明 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})\)</span>。我们可以使用之前得到的结论，重写我们试图证明的命题 <span class="math inline">\(P\)</span> 中的参数，使之匹配我们已知的参数的形式，之后的证明就变得平凡了。在这个例子里，统一化作用的对象是 <span class="math inline">\(e = \mathsf{Var}(x)\)</span>。</p>
-<p>在本章的最后，我们对术语做一个重要的说明。诸如 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})\)</span> 一类的公式结合了多个层次的记号。对此我们的理解是，我们是在某种 <em>元语言（metalanguage）</em> 上进行数学推理，这种语言通常适用于各种证明任务。我们只是恰好将其应用于对某些 <em>对象语言（object language）</em> 进行推理。这里的对象语言指是指拥有形式化定义的语法的编程语言，例如本章中的算数表达式。在这个例子里，<span class="math inline">\(x\)</span> 是元语言的变量，而 <span class="math inline">\(\mathsf{Var}(x)\)</span> 是对象语言的一个变量表达式。我们很难用语言对这两者之间的区别做一个完全形式化的阐述，但请注意公式中混合了元语言与对象语言概念的部分！</p>
-<section class="footnotes" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>这些等式几乎原文来自 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Semiring">https://en.wikipedia.org/wiki/Semiring</a>。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+在本章的最后，我们对术语做一个重要的说明。诸如 <span class="math inline">\(\newcommand{\size}[1]{\lvert #1 \rvert} P(\size{\mathsf{Plus}(\mathsf{Var}(x), \mathsf{Const}(7))})\)</span> 一类的公式结合了多个层次的记号。对此我们的理解是，我们是在某种 <em>元语言（metalanguage）</em> 上进行数学推理，这种语言通常适用于各种证明任务。我们只是恰好将其应用于对某些 <em>对象语言（object language）</em> 进行推理。这里的对象语言指是指拥有形式化定义的语法的编程语言，例如本章中的算数表达式。在这个例子里，<span class="math inline">\(x\)</span> 是元语言的变量，而 <span class="math inline">\(\mathsf{Var}(x)\)</span> 是对象语言的一个变量表达式。我们很难用语言对这两者之间的区别做一个完全形式化的阐述，但请注意公式中混合了元语言与对象语言概念的部分！
+<div id="footnotes">
+<hr>
+<div id="footnotelist">
+<ol style="list-style: none; padding-left: 0; margin-left: 40px">
+<li id="fn:1">
+<span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这些等式几乎原文来自 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Semiring">https://en.wikipedia.org/wiki/Semiring</a>。<a href="#fnref:1" rev="footnote">↩︎</a></span>
+</li>
 </ol>
-</section>
+</div>
+</div>
 
     </div>
 
@@ -551,7 +555,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
